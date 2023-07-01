@@ -32,6 +32,7 @@ private:
     float roll;
     float pitch;
     float yaw;
+    float betaDef = 0.1f;
     char anglesComputed;
     void computeAngles();
 
@@ -39,6 +40,8 @@ private:
 // Function declarations
 public:
     Madgwick(void);
+    void reset(void);
+    void set_beta(float beta) { betaDef = beta;}
     void begin(float sampleFrequency) { invSampleFreq = 1.0f / sampleFrequency; }
     void update(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz);
     void updateIMU(float gx, float gy, float gz, float ax, float ay, float az);

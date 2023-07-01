@@ -643,7 +643,7 @@ void init_pwm(void)
 void telemetry(void)
 {
   //Telemetry
-  const uint8_t MAXINDEX=94;
+  const uint8_t MAXINDEX=98;
   float d_float;
   uint8_t d_int[4];
   uint8_t senddata[MAXINDEX]; 
@@ -868,6 +868,9 @@ void telemetry(void)
     index = index + 4;
     //23 RL_duty
     data2log(senddata, RL_duty, index);
+    index = index + 4;
+    //24 Altitude2
+    data2log(senddata, Altitude2, index);
     index = index + 4;
 
     //Send !
