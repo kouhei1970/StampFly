@@ -354,14 +354,14 @@ void get_command(void)
 {
   Control_mode = Stick[CONTROLMODE];
 
-
   //if(OverG_flag == 1){
   //  T_ref = 0.0;
   //}
   //Throttle curve conversion　スロットルカーブ補正
   float thlo = Stick[THROTTLE];
   if (thlo>1.0f) thlo = 1.0f;
-  if (thlo<0.0f) thlo = 0.0f;
+  if (thlo<0.02f) thlo = 0.0f;
+
   //T_ref = (3.27f*thlo -5.31f*thlo*thlo + 3.04f*thlo*thlo*thlo)*BATTERY_VOLTAGE;
   //T_ref = (2.92f*thlo -4.90f*thlo*thlo + 2.88f*thlo*thlo*thlo)*BATTERY_VOLTAGE;
   //T_ref = (3.01f*thlo -5.20f*thlo*thlo + 3.14f*thlo*thlo*thlo)*BATTERY_VOLTAGE;
@@ -416,8 +416,8 @@ void get_command(void)
     BtnA_off_flag = 1;
   }
 
-  USBSerial.printf("%5.2f %5.2f %5.2f %5.2f \n\r", 
-    Stick[THROTTLE], Stick[RUDDER], Stick[AILERON], Stick[ELEVATOR]);
+  //USBSerial.printf("%5.2f %5.2f %5.2f %5.2f \n\r", 
+  //  Stick[THROTTLE], Stick[RUDDER], Stick[AILERON], Stick[ELEVATOR]);
 
 }
 

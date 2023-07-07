@@ -2,6 +2,7 @@
 
 MPU6886 IMU;
 Madgwick Drone_ahrs;
+Alt_kalman EstimatedAltitude;
 
 // Set I2C address to 0x40 (A0 pin -> GND)
 INA3221 ina3221(INA3221_ADDR40_GND);
@@ -279,6 +280,7 @@ void sensor_read(void)
 
   float r33 =  cphi*ctht;
   Altitude2 = r33*Altitude;
+  //EstimatedAltitude.update(Altitude2, r33*Az)
 
 }
 
