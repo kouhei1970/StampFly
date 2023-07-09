@@ -1,4 +1,3 @@
-// #include <Ps3Controller.h>
 #include "rc.hpp"
 #include <WiFi.h>
 #include <esp_now.h>
@@ -13,7 +12,8 @@ float rctime=0.0;
 volatile uint8_t Connect_flag = 0;
 
 //Telemetry相手のMAC ADDRESS 4C:75:25:AD:B6:6C
-const uint8_t addr[6] = {0x4C, 0x75, 0x25, 0xAD, 0xB6, 0x6C};
+//ATOM Lite (C): 4C:75:25:AE:27:FC
+const uint8_t addr[6] = {0x4C, 0x75, 0x25, 0xAE, 0x27, 0xFC};
 
 esp_now_peer_info_t peerInfo;
 
@@ -104,9 +104,18 @@ void OnDataRecv(const uint8_t *mac_addr, const uint8_t *recv_data, int data_len)
   //Stick[AILERON] /= (0.5*3.14159);
   //Stick[ELEVATOR] /= (0.5*3.14159);
   if(Stick[THROTTLE]<0.0) Stick[THROTTLE]=0.0;
-
-
-
+#endif
+  
+#if 0
+  USBSerial.printf("%6.3f %6.3f %6.3f %6.3f %6.3f %6.3f %6.3f %6.3f\n\r", 
+                                            Stick[THROTTLE],
+                                            Stick[AILERON],
+                                            Stick[ELEVATOR],
+                                            Stick[RUDDER],
+                                            Stick[BUTTON],
+                                            Stick[BUTTON_A],
+                                            Stick[CONTROLMODE],
+                                            Stick[LOG]);
 #endif
 
 }
@@ -127,8 +136,6 @@ void rc_init(void)
     USBSerial.println("ESPNow Init Failed");
     ESP.restart();
   }
-
-  
 
   //ペアリング
   

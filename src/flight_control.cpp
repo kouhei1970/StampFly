@@ -477,10 +477,10 @@ void rate_control(void)
 
       //Motor Control
       //正規化Duty
-      FR_duty = (T_ref +(-P_com +Q_com -R_com)*0.25f)/BATTERY_VOLTAGE;
-      FL_duty = (T_ref +( P_com +Q_com +R_com)*0.25f)/BATTERY_VOLTAGE;
-      RR_duty = (T_ref +(-P_com -Q_com +R_com)*0.25f)/BATTERY_VOLTAGE;
-      RL_duty = (T_ref +( P_com -Q_com -R_com)*0.25f)/BATTERY_VOLTAGE;
+      FR_duty = (T_ref +(-P_com +Q_com +R_com)*0.25f)/BATTERY_VOLTAGE;
+      FL_duty = (T_ref +( P_com +Q_com -R_com)*0.25f)/BATTERY_VOLTAGE;
+      RR_duty = (T_ref +(-P_com -Q_com -R_com)*0.25f)/BATTERY_VOLTAGE;
+      RL_duty = (T_ref +( P_com -Q_com +R_com)*0.25f)/BATTERY_VOLTAGE;
       
       const float minimum_duty=0.0f;
       const float maximum_duty=0.95f;
@@ -907,7 +907,7 @@ void append_data(uint8_t* data , uint8_t* newdata, uint8_t index, uint8_t len)
 uint8_t lock_com(void)
 {
   static uint8_t chatta=0,state=0;
-  if( (int)Stick[BUTTON] == 0 )
+  if( (int)Stick[BUTTON] == 1 )
   { 
     chatta++;
     if(chatta>20){
